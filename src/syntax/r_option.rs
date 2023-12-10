@@ -1,3 +1,5 @@
+use std::fmt::Display;
+
 enum IpAddrKind {
     V4,
     V6,
@@ -19,8 +21,16 @@ fn run() {
         address: String::from("::1"),
     };
 
-    println!("home: {}", home.address);
-    println!("loopback: {}", loopback.address);
+    println!("home, : {}", home.address);
+    println!("loopback, address: {}", home.address);
+}
+
+fn adder(a: i32, b: i32) -> Option<i32> {
+    if a + b < 100 {
+        Some(a + b)
+    } else {
+        None
+    }
 }
 
 #[cfg(test)]
@@ -31,5 +41,14 @@ mod tests {
     #[test]
     fn it_works() {
         run()
+    }
+
+    #[test]
+    fn adder_test() {
+        if let Some(n) = adder(100, 10) {
+            println!("{}", n)
+        } else {
+            println!("none")
+        }
     }
 }
