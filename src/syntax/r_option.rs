@@ -1,10 +1,7 @@
-use std::fmt::Display;
-
 enum IpAddrKind {
     V4,
     V6,
 }
-
 struct IpAddr {
     kind: IpAddrKind,
     address: String,
@@ -21,8 +18,20 @@ fn run() {
         address: String::from("::1"),
     };
 
-    println!("home, : {}", home.address);
-    println!("loopback, address: {}", home.address);
+    let home_kind = match home.kind {
+        IpAddrKind::V4 => "v4",
+        IpAddrKind::V6 => "v6",
+    };
+    let loopback_kind = match home.kind {
+        IpAddrKind::V4 => "v4",
+        IpAddrKind::V6 => "v6",
+    };
+
+    println!("home, kind:{}, address: {}", home.address, home_kind);
+    println!(
+        "loopback, kind:{}, address: {}",
+        loopback.address, loopback_kind
+    );
 }
 
 fn adder(a: i32, b: i32) -> Option<i32> {
