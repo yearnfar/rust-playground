@@ -1,5 +1,5 @@
 fn run() {
-    let _c = CustomSmartPoint {
+    let _c: CustomSmartPoint = CustomSmartPoint {
         data: "my staff".to_string(),
     };
 
