@@ -16,6 +16,33 @@ impl Human for User {
     }
 }
 
+trait Animal {
+    fn make_sound(&self);
+}
+struct Cat {}
+
+impl Animal for Cat {
+    fn make_sound(&self) {
+        println!("The cat says 'Meow!'");
+    }
+}
+
+struct Dog {}
+
+impl Animal for Dog {
+    fn make_sound(&self) {
+        println!("The dog says 'Woof!'");
+    }
+}
+
+fn run() {
+    let dog = Dog {};
+    let cat = Cat {};
+
+    dog.make_sound();
+    cat.make_sound();
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -31,5 +58,10 @@ mod tests {
             user.say_hello(),
             "Hello, my name is John and I am 25 years old"
         );
+    }
+
+    #[test]
+    fn works_run() {
+        run()
     }
 }
