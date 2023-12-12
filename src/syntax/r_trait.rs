@@ -36,11 +36,19 @@ impl Animal for Dog {
 }
 
 fn run() {
-    let dog = Dog {};
-    let cat = Cat {};
+    let ani = rand_animal(1);
+    ani.make_sound();
 
-    dog.make_sound();
-    cat.make_sound();
+    let ani2 = rand_animal(11);
+    ani2.make_sound();
+}
+
+fn rand_animal(i: i32) -> Box<dyn Animal> {
+    if i < 10 {
+        Box::new(Dog {})
+    } else {
+        Box::new(Cat {})
+    }
 }
 
 #[cfg(test)]
