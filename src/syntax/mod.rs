@@ -5,6 +5,7 @@ pub mod r_result;
 pub mod r_string;
 pub mod r_thread;
 pub mod r_trait;
+pub mod r_vec;
 
 pub mod smartpointer_deref;
 pub mod smartpointer_drop;
