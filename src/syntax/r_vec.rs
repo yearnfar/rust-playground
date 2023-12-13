@@ -7,17 +7,20 @@ fn run() {
     arr2.push(2);
     arr2.push(1);
     println!("{:?}", arr2);
-    if let Some(m) = arr2.get(0) {
-        println!("{}", m);
-    } else {
-        println!("None")
+
+    for idx in 0..2 {
+        if let Some(&m) = arr2.get(idx) {
+            println!("{}", m);
+        } else {
+            println!("None")
+        }
     }
 
-    if let Some(m) = arr2.get(199) {
-        println!("{}", m);
-    } else {
-        println!("None")
-    }
+    let v = match arr2.get(1) {
+        Some(m) => m,
+        None => &0,
+    };
+    println!("{:?}", v);
 }
 
 #[cfg(test)]
