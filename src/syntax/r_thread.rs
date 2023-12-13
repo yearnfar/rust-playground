@@ -1,4 +1,6 @@
 use std::sync::mpsc;
+use std::sync::Arc;
+use std::sync::Mutex;
 use std::thread;
 use std::time::Duration;
 
@@ -69,6 +71,36 @@ fn run_channel() {
     // println!("got: {}", received)
 }
 
+fn run_mutex() {
+    let m = Mutex::new(5);
+    {
+        let mut num = m.lock().unwrap();
+        *num = 10;
+    }
+    println!("{:?}", m);
+}
+
+fn run_mutex2() {
+    let cnt = Arc::new(Mutex::new(0));
+    let mut handles = vec![];
+
+    for _ in 0..10 {
+        let cnt = Arc::clone(&cnt);
+        let handle = thread::spawn(move || {
+            let mut num = cnt.lock().unwrap();
+            *num += 1;
+        });
+
+        handles.push(handle);
+    }
+
+    for handle in handles {
+        handle.join().unwrap();
+    }
+
+    println!("Result: {}", cnt.lock().unwrap());
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -86,5 +118,15 @@ mod tests {
     #[test]
     fn test_run_channel() {
         run_channel();
+    }
+
+    #[test]
+    fn test_run_mutex() {
+        run_mutex();
+    }
+
+    #[test]
+    fn test_run_mutex2() {
+        run_mutex2();
     }
 }
